@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import { Form, Input, Button, Checkbox } from 'antd';
+import { Link } from 'react-router-dom';
+import RegistrationForm from "./regster";
 
 const layout = {
     labelCol: { span: 8 },
@@ -51,8 +53,11 @@ class Login extends React.Component {
                     </Form.Item>
 
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" style={{margin:'0 10px' }}>
                             Submit
+                        </Button>
+                        <Button type="primary" htmlType="submit">
+                            Register
                         </Button>
                     </Form.Item>
                 </Form>

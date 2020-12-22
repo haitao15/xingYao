@@ -1,8 +1,10 @@
+import React from "react";
+import ReactDom from "react-dom";
 import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
 import Login from "./user/login";
-
+import RegistrationForm from "./user/regster";
 function App() {
   return (
     <div className="App">
