@@ -4,6 +4,7 @@ import {Form, Input, Button, Checkbox} from 'antd';
 import RegistrationForm from "./regster";
 import {Link} from 'react-router-dom'
 
+
 const layout = {
     labelCol: {span: 8},
     wrapperCol: {span: 16},
@@ -12,10 +13,31 @@ const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 };
 
+const post = {
+    username: "root",
+    password: "0123456789"
+}
+const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': 'http://localhost:8080',
+    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+    'Access-Control-Allow-Credentials': true
+};
 
 class Login extends React.Component {
     onFinish = values => {
-        console.log('Success:', values);
+        fetch('http://localhost:8080/login', {
+            // post提交
+            method: "POST",
+            mode: 'cors',
+            // credentials: 'include',
+            headers: headers,
+            body: JSON.stringify(post)//把提交的内容转字符串
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
     };
 
     onFinishFailed = errorInfo => {
@@ -24,7 +46,6 @@ class Login extends React.Component {
 
     register = () => {
         // console.log('Failed111111');
-        return <div>1111</div>
     };
 
     render() {
@@ -62,13 +83,14 @@ class Login extends React.Component {
                             <Button type="primary" htmlType="submit" style={{margin: '0 10px'}}>
                                 Submit
                             </Button>
+                            <Button type="primary" htmlType="submit">
+                                <Link to="/register">Register</Link>
+                            </Button>
                         </Form.Item>
                     </Form>
                 </div>
                 <div>
-                        <Button type="primary" htmlType="submit" >
-                            <Link to="/register">Register</Link>
-                        </Button>
+
 
                 </div>
             </div>
