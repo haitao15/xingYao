@@ -26,13 +26,14 @@ const headers = {
 
 class Login extends React.Component {
     onFinish = values => {
+        console.log(values);
         fetch('http://localhost:8080/login', {
             // post提交
             method: "POST",
             mode: 'cors',
             // credentials: 'include',
             headers: headers,
-            body: JSON.stringify(post)//把提交的内容转字符串
+            body: JSON.stringify(values)//把提交的内容转字符串
         })
             .then(res => res.json())
             .then(data => {
@@ -42,10 +43,6 @@ class Login extends React.Component {
 
     onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
-    };
-
-    register = () => {
-        // console.log('Failed111111');
     };
 
     render() {
