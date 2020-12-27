@@ -13,10 +13,6 @@ const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 };
 
-const post = {
-    username: "root",
-    password: "0123456789"
-}
 const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:8080',
@@ -34,11 +30,11 @@ class Login extends React.Component {
             // credentials: 'include',
             headers: headers,
             body: JSON.stringify(values)//把提交的内容转字符串
+        }).then(res =>
+            res.json()
+        ).then(data => {
+            console.log(data)
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
     };
 
     onFinishFailed = errorInfo => {

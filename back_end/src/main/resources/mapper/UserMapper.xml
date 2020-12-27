@@ -4,16 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.haitao.demo.dao.UserMapper">
-<!--    <resultMap id="BaseResultMap" type="com.haitao.demo.pojo.User">-->
-<!--        <id column="id" jdbcType="INTEGER" property="id" />-->
-<!--        <result column="name" jdbcType="VARCHAR" property="name" />-->
-<!--        <result column="password" jdbcType="VARCHAR" property="password" />-->
-<!--    </resultMap>-->
+    <resultMap id="BaseResultMap" type="com.haitao.demo.pojo.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
 
     <select id="getUserById" resultType="com.haitao.demo.pojo.User">
        select * from user
        where id = #{id,jdbcType=INTEGER};
     </select>
 
+    <select id="getUserByName" resultType="com.haitao.demo.pojo.User">
+        select * from user
+        where name = #{name};
+    </select>
 
 </mapper>

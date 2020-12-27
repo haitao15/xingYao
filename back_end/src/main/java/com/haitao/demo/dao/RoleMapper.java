@@ -1,14 +1,12 @@
 package com.haitao.demo.dao;
 
-import com.haitao.demo.pojo.User;
+import com.haitao.demo.pojo.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface UserMapper {
+public interface RoleMapper {
 
-    User getUserById(Integer id);
-
-    User getUserByName(String name);
+    Role getRoleById(Integer id);
 }

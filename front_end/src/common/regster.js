@@ -12,6 +12,8 @@ import {
     AutoComplete,
 } from 'antd';
 import {QuestionCircleOutlined} from '@ant-design/icons';
+import AdminHome from "../admin/AdminHome";
+import UserHome from "../user/UserHome";
 
 const {Option} = Select;
 const AutoCompleteOption = AutoComplete.Option;
