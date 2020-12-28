@@ -53,8 +53,8 @@ class Login extends React.Component {
                         onFinishFailed={this.onFinishFailed}
                     >
                         <Form.Item
-                            label="Username"
-                            name="username"
+                            label="name"
+                            name="name"
                             rules={[{required: true, message: 'Please input your username!'}]}
                         >
                             <Input/>
