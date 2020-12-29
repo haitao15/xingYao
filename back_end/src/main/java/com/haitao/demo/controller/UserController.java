@@ -3,11 +3,13 @@ package com.haitao.demo.controller;
 import com.haitao.demo.pojo.User;
 import com.haitao.demo.response.Result;
 import com.haitao.demo.response.ResultCodeEnum;
+import com.haitao.demo.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "*")
 public class UserController {
+
+    @Autowired
+    UserService userService;
 
     @PostMapping("/login")
     @ResponseBody
@@ -30,7 +35,9 @@ public class UserController {
 
         try {
             subject.login(token);
-            return Result.ok(ResultCodeEnum.SUCCESS_LOGIN);
+            Result result = Result.ok(ResultCodeEnum.SUCCESS_LOGIN);
+            result.setData(userService.getUserByName(username));
+            return result;
         } catch (UnknownAccountException e) {
 //            model.addAttribute("msg", "用户名错误");
             return Result.error(ResultCodeEnum.ERROR_NOT_EXISTS_USER);
@@ -40,27 +47,13 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/userHome")
+    @RequestMapping("/user/home")
     @ResponseBody
-    public String userHome() {
-
-        return "userHome";
+    public Result userHome() {
+        return Result.ok(ResultCodeEnum.SUCCESS);
     }
 
-    @RequestMapping("/user/add")
-    @ResponseBody
-    public String add() {
-        return "add";
-    }
-
-    @RequestMapping("/user/update")
-    @ResponseBody
-    public String update() {
-        return "update";
-    }
-
-
-    @RequestMapping("/adminHome")
+    @RequestMapping("/admin/home")
     @ResponseBody
     public String adminHome() {
         return "adminHome";
@@ -68,13 +61,13 @@ public class UserController {
 
     @RequestMapping("/toLogin")
     @ResponseBody
-    public String toLogin() {
-        return "login";
+    public Result toLogin() {
+        return Result.ok(ResultCodeEnum.No_AUTHENTICATE);
     }
 
     @RequestMapping("/noauth")
     @ResponseBody
-    public String noauth() {
-        return "未经授权的页面跳转";
+    public Result noauth() {
+        return Result.ok(ResultCodeEnum.No_AUTHORICATE);
     }
 }

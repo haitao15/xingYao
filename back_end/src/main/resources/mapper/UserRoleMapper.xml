@@ -6,7 +6,7 @@
 <mapper namespace="com.haitao.demo.dao.UserRoleMapper">
 
     <select id="getRoleIdByUserId" resultType="java.lang.Integer">
-       select * from user_role
+       select role_id from user_role
        where user_id = #{userId,jdbcType=INTEGER};
     </select>
 

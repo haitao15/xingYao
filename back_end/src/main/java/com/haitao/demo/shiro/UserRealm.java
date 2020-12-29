@@ -1,7 +1,7 @@
 package com.haitao.demo.shiro;
 
-import com.haitao.demo.pojo.User;
 import com.haitao.demo.service.UserService;
+import com.haitao.demo.service.model.UserModel;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -18,35 +18,35 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("执行了授权方法");
+//        System.out.println("执行了授权方法");
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 
         //实际上应该从数据库中查询用户的权限
-        simpleAuthorizationInfo.addStringPermission("user:add");
+        //simpleAuthorizationInfo.addStringPermission("user:add");
 
         //获取当前登录对象
         Subject subject = SecurityUtils.getSubject();
-        User user = (User) subject.getPrincipal();
+        UserModel userModel = (UserModel) subject.getPrincipal();
 
         //数据库中查询用户的权限
-        //simpleAuthorizationInfo.addStringPermission();
+        simpleAuthorizationInfo.addStringPermission(userModel.getRole());
         return simpleAuthorizationInfo;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("执行了认证方法");
+//        System.out.println("执行了认证方法");
 
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 
         //数据库查询当前用户
-        User user = userService.getUserByName(token.getUsername());
+        UserModel userModel = userService.getUserByName(token.getUsername());
 
-        if(user == null) {
+        if(userModel == null) {
             return null;//抛出UnknownAccountException异常
         }
 
         //密码认证，shiro操作,加密
-        return new SimpleAuthenticationInfo(user, user.getPassword(), "");
+        return new SimpleAuthenticationInfo(userModel, userModel.getPassword(), "");
     }
 }

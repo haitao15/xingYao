@@ -1,10 +1,11 @@
 package com.haitao.demo.service;
 
 import com.haitao.demo.pojo.User;
+import com.haitao.demo.service.model.UserModel;
 
 public interface UserService {
 
-    User getUserById(Integer id);
+    UserModel getUserById(Integer id);
 
-    User getUserByName(String name);
+    UserModel getUserByName(String name);
 }

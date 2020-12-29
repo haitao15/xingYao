@@ -4,7 +4,7 @@ public class Role {
 
     private Integer id;
 
-    private String name;
+    private String role;
 
     public Integer getId() {
         return id;
@@ -14,19 +14,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRole() {
+        return role;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -23,8 +23,11 @@ public class ShiroConfig {
         //添加shiro的内置过滤器
         Map<String, String> map = new LinkedHashMap<>();
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-        map.put("/user/add","perms[user:add]");
-        map.put("/user/*", "authc");
+        map.put("/user/home","authc");
+        map.put("/admin/home","authc");
+        map.put("/user/home","perms[user]");
+        map.put("/admin/home","perms[admin]");
+//        map.put("/*", "authc");
 
         //设置登陆的请求
         shiroFilterFactoryBean.setLoginUrl("/toLogin");
