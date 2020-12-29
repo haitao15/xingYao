@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import {Form, Input, Button, Checkbox} from 'antd';
+import {Form, Input, Button, Checkbox, message, Space} from 'antd';
 import RegistrationForm from "./regster";
-import {Link} from 'react-router-dom'
-
+import UserHome from "../user/UserHome";
+import {Link, Redirect} from 'react-router-dom'
 
 const layout = {
     labelCol: {span: 8},
@@ -21,8 +21,22 @@ const headers = {
 };
 
 class Login extends React.Component {
+
+    success = (msg) => {
+        message.success(msg);
+    };
+
+    error = (msg) => {
+        message.error(msg);
+    };
+
+    warning = (msg) => {
+        message.warning(msg);
+    };
+
     onFinish = values => {
-        console.log(values);
+
+        // console.log(values);
         fetch('http://localhost:8080/login', {
             // post提交
             method: "POST",
@@ -40,6 +54,11 @@ class Login extends React.Component {
     onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
     };
+
+    test = info => {
+        this.props.history.push("/register")
+    };
+
 
     render() {
         return (
@@ -79,12 +98,14 @@ class Login extends React.Component {
                             <Button type="primary" htmlType="submit">
                                 <Link to="/register">Register</Link>
                             </Button>
+
                         </Form.Item>
                     </Form>
                 </div>
                 <div>
-
-
+                    {/*<Button type="primary" htmlType="submit" onClick={()=>this.test()}>*/}
+                    {/*    Test*/}
+                    {/*</Button>*/}
                 </div>
             </div>
         );
